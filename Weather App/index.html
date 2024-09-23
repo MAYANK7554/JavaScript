@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Checker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <div class = "Card">
+        <div class = "search">
+            <input type="text" placeholder="Enter City Name">
+            <button onclick=checkWeather(searchBox.value)> <img src = images/search.png ></button>   
+            
+            
+        </div>
+
+        <div class = "weather">
+            <img class="Weather-Img"src = "images/rain.png">
+
+            <h1 class="Temperature" >31°C</h1>
+
+            <h1 class="City">Delhi</h1>
+
+            <img class="Humidity-Img" src = "images/humidity.png">
+            <h1 class="Humidity">50%</h1>
+
+            <img class="Wind-Img" src = "images/wind.png">
+            <h1 class="Wind">10 Km/h</h1>
+        </div>
+    </div>
+    
+
+    <script>
+        const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const apikEY = "0c45fa0fa5791fb9013cf2bf2e390453";
+    
+        const searchBox = document.querySelector(".search input")
+        const searchBtn = document.querySelector(".search button")
+    
+        async function checkWeather(city){
+            const response = await fetch(apiURL + city +`&appID=${apikEY}`)
+            var Data = await response.json();
+    
+            
+    
+            document.querySelector(".City").innerHTML = Data.name;        
+            document.querySelector(".Temperature").innerHTML = Data.main.temp + "°c";        
+            document.querySelector(".Humidity").innerHTML = Data.main.humidity + "%";        
+            document.querySelector(".Wind").innerHTML = Data.wind.speed + " Kmph";        
+        }
+    
+        
+    </script>
+</body>
+</html>
